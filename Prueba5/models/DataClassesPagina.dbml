@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="pagina" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-T8L1TM0;Initial Catalog=pagina;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="paginaConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Administrador" Member="Administrador">
+    <Type Name="Administrador">
+      <Column Name="idAdministrador" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombreAdm" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="rutAdm" Type="System.String" DbType="Char(12) NOT NULL" CanBeNull="false" />
+      <Column Name="contrasenaAdm" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="idTipoPersona" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="usuario" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="tipoPersona_Administrador" Member="tipoPersona" ThisKey="idTipoPersona" OtherKey="idTipoPersona" Type="tipoPersona" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cliente" Member="Cliente">
+    <Type Name="Cliente">
+      <Column Name="IdCliente" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RutCliente" Type="System.String" DbType="Char(12) NOT NULL" CanBeNull="false" />
+      <Column Name="idTipoPersona" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nombreCliente" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="contrasenaCliente" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="usuario" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="idlocal" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Local_Cliente" Member="Local" ThisKey="idlocal" OtherKey="idLocal" Type="Local" IsForeignKey="true" />
+      <Association Name="tipoPersona_Cliente" Member="tipoPersona" ThisKey="idTipoPersona" OtherKey="idTipoPersona" Type="tipoPersona" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.distancia" Member="distancia">
+    <Type Name="distancia">
+      <Column Name="idDistancia" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FECHA" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="HORA" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="DISTANCIA" Member="DISTANCIA1" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Estacionamiento" Member="Estacionamiento">
+    <Type Name="Estacionamiento">
+      <Column Name="idEstacionamiento" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="disponibilidad" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="idParkimetro" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Estacionamiento_Local" Member="Local" ThisKey="idEstacionamiento" OtherKey="idEstacionamiento" Type="Local" />
+      <Association Name="Parkimetro_Estacionamiento" Member="Parkimetro" ThisKey="idParkimetro" OtherKey="idParkimetro" Type="Parkimetro" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Local" Member="Local">
+    <Type Name="Local">
+      <Column Name="idLocal" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombreLocal" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Direccion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="idEstacionamiento" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Local_Cliente" Member="Cliente" ThisKey="idLocal" OtherKey="idlocal" Type="Cliente" />
+      <Association Name="Estacionamiento_Local" Member="Estacionamiento" ThisKey="idEstacionamiento" OtherKey="idEstacionamiento" Type="Estacionamiento" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Parkimetro" Member="Parkimetro">
+    <Type Name="Parkimetro">
+      <Column Name="idParkimetro" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="fecha" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="hora" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="minuto" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="segundo" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="TiempoUso" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="saldo" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Parkimetro_Estacionamiento" Member="Estacionamiento" ThisKey="idParkimetro" OtherKey="idParkimetro" Type="Estacionamiento" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Persona" Member="Persona">
+    <Type Name="Persona">
+      <Column Name="idPersona" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombrePersona" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="apellidoPersona" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="usuario" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="contrasenna" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="salt" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="edad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="estado" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="idTipoPersona" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="tipoPersona_Persona" Member="tipoPersona" ThisKey="idTipoPersona" OtherKey="idTipoPersona" Type="tipoPersona" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tipoPersona" Member="tipoPersona">
+    <Type Name="tipoPersona">
+      <Column Name="idTipoPersona" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="estado" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="tipoPersona_Administrador" Member="Administrador" ThisKey="idTipoPersona" OtherKey="idTipoPersona" Type="Administrador" />
+      <Association Name="tipoPersona_Cliente" Member="Cliente" ThisKey="idTipoPersona" OtherKey="idTipoPersona" Type="Cliente" />
+      <Association Name="tipoPersona_Persona" Member="Persona" ThisKey="idTipoPersona" OtherKey="idTipoPersona" Type="Persona" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ubicaciones" Member="ubicaciones">
+    <Type Name="ubicaciones">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ubicaciones" Member="ubicaciones1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="latitud" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="longitud" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.usuario" Member="usuario">
+    <Type Name="usuario">
+      <Column Name="idUsuario" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nombreCompleto" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="nombreUsuario" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="password1" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Function Name="dbo.SP_crearCliente" Method="SP_crearCliente">
+    <Parameter Name="nombrePersona" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="apellidoPersona" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="usuario" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="contrasenna" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="salt" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="edad" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.SP_crearMensajero" Method="SP_crearMensajero">
+    <Parameter Name="nombrePersona" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="apellidoPersona" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="usuario" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="contrasenna" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="salt" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="edad" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
